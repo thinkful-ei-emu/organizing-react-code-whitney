@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 
 function NoteList(props) {
 
@@ -9,7 +11,9 @@ function NoteList(props) {
         const convertedDate = date.toDateString()
             return (
                 <li key={note.id}>
+                    <Link to={`/note/${note.id}`}>
                     <h2>{note.name}</h2>
+                    </Link>
                     <p>Date Modified On: {convertedDate}</p>
                     <button type="click">Delete Note</button>
                 </li>
@@ -21,7 +25,9 @@ function NoteList(props) {
         const convertedDate = date.toDateString()
         return (
             <li key={note.id}>
+                <Link to={`/note/${note.id}`}>
                 <h2>{note.name}</h2>
+                </Link>
                 <p>Date Modified On: {convertedDate}</p>
                 <button type="click">Delete Note</button>
             </li>
