@@ -12,10 +12,10 @@ function Note(props) {
       const date = new Date(note.modified);
       const convertedDate = date.toDateString();
 
-        const folder = props.folders.find(folder =>{
+        const folder = props.folders.find(folder => {
             if (folder.id === note.folderId){
                 return true
-            }
+            } else return false 
         })
 
 //         console.log(folder.name);

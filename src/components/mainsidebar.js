@@ -1,22 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './styles/mainsidebar.css'
 
 function MainSideBar(props) {
     const folderList = props.folders.map(folder => {
         return(
-            <li key={folder.id}>
-                <NavLink to={`/folder/${folder.id}`}>
+            <li key={folder.id} className="nav-list">
+                <NavLink to={`/folder/${folder.id}`} style={{ textDecoration: 'none' }}>
                   {folder.name}
                 </NavLink>
             </li>
         )
     })
     return (
-        <div>
+        <div className="nav-container">
             <nav>
                 {folderList}
             </nav>
-            <button>Add Folder</button>
+            <button className="add-button">Add Folder</button>
         </div>
     )
 }
