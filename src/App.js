@@ -18,11 +18,17 @@ class App extends React.Component {
   return (
     <div className="App">
       <Header/>
-        <Route path='/' 
-        render={props => <MainSideBar folders={this.state.store.folders}/>}
+        <Route exact path='/' 
+        render={props => <MainSideBar folders={this.state.store.folders} />}
         />
       <Route exact path='/' 
-      render={props => <Main notes={this.state.store.notes}/>}
+      render={props => <Main notes={this.state.store.notes} folders={this.state.store.folders} match={props.match}/>}
+      />
+      <Route exact path='/folder/:folderId'
+      render={props => <> <MainSideBar folders={this.state.store.folders} match={props.match}/> 
+      <Main notes={this.state.store.notes} folders={this.state.store.folders} match={props.match}/>
+      </>}
+
       />
     </div>
   );
