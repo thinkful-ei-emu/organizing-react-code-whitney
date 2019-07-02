@@ -1,4 +1,5 @@
 import React from "react";
+import './styles/note.css'
 
 function Note(props) {
 
@@ -37,16 +38,18 @@ function Note(props) {
     //   );
 
   return <div key={note.id}>
-  <button onClick={()=>props.history.goBack()}>Go Back</button>
-  <h2>{folder.name}</h2>
+    <div className="button-folder-container">
+  <button className="go-back" onClick={()=>props.history.goBack()}>Go Back</button>
+  <h2 className="folder-name">{folder.name}</h2>
+  </div>
 
-  <div>
-    <h2>{note.name}</h2>
+  <div className="expanded-note">
+    <h2 className="note-name">{note.name}</h2>
     <p>Date Modified On: {convertedDate}</p>
     <button type="click">Delete Note</button>
   </div>
 
-  <p>{note.content}</p>
+  <p className="note-content">{note.content}</p>
 
 </div>
 }

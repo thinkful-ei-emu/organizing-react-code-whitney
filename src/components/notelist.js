@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import './styles/notelist.css'
 
 
 function NoteList(props) {
@@ -15,7 +16,7 @@ function NoteList(props) {
                     <h2>{note.name}</h2>
                     </Link>
                     <p>Date Modified On: {convertedDate}</p>
-                    <button type="click">Delete Note</button>
+                    <button type="click" className="delete-button">Delete Note</button>
                 </li>
             )
         })
@@ -29,19 +30,19 @@ function NoteList(props) {
                 <h2>{note.name}</h2>
                 </Link>
                 <p>Date Modified On: {convertedDate}</p>
-                <button type="click">Delete Note</button>
+                <button type="click" className="delete-button">Delete Note</button>
             </li>
         )
     })
 
     if (props.match.url === '/') {
         return (
-            <div>
+            <div className="note-list">
                 {noteList}
             </div>
         )
     } else return (
-        <div>
+        <div className="note-list">
             {filteredNoteList}
         </div>
     )
