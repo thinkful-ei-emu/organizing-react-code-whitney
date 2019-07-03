@@ -1,11 +1,14 @@
 import React from "react";
 import './styles/note.css'
+import StoreContext from '../context/StoreContext';
 
-function Note(props) {
+class Note extends React.Component {
 
+  static contextType = StoreContext;
 
+  render(){
 
-  const note = props.notes.find(note => `/note/${note.id}` === props.match.url);
+  const note = this.context.notes.find(note => `/note/${note.id}` === this.props.match.url);
   
 //   props.notes
 //     .filter(note => `/note/${note.id}` === props.match.url)
@@ -13,7 +16,7 @@ function Note(props) {
       const date = new Date(note.modified);
       const convertedDate = date.toDateString();
 
-        const folder = props.folders.find(folder => {
+        const folder = this.context.folders.find(folder => {
             if (folder.id === note.folderId){
                 return true
             } else return false 
@@ -39,7 +42,7 @@ function Note(props) {
 
   return <div key={note.id}>
     <div className="button-folder-container">
-  <button className="go-back" onClick={()=>props.history.goBack()}>Go Back</button>
+  <button className="go-back" onClick={()=>this.props.history.goBack()}>Go Back</button>
   <h2 className="folder-name">{folder.name}</h2>
   </div>
 
@@ -53,5 +56,7 @@ function Note(props) {
 
 </div>
 }
+}
+
 
 export default Note;

@@ -6,6 +6,7 @@ import Main from './components/main';
 import MainSideBar from './components/mainsidebar'
 import Header from './components/header'
 import Note from './components/note'
+import StoreContext from './context/StoreContext'
 
 
 class App extends React.Component {
@@ -17,23 +18,28 @@ class App extends React.Component {
   render(){
 
   return (
+    <StoreContext.Provider value = {{
+      folders: this.state.store.folders,
+      notes: this.state.store.notes
+    }}>
     <div className="App">
       <Header/>
         <Route exact path='/' 
-        render={props => <MainSideBar folders={this.state.store.folders} />}
+        render={props => <MainSideBar />}
         />
       <Route exact path='/' 
-      render={props => <Main notes={this.state.store.notes} folders={this.state.store.folders} match={props.match}/>}
+      render={props => <Main match={props.match}/>}
       />
       <Route exact path='/folder/:folderId'
-      render={props => <> <MainSideBar folders={this.state.store.folders} match={props.match}/> 
-      <Main notes={this.state.store.notes} folders={this.state.store.folders} match={props.match}/>
+      render={props => <> <MainSideBar match={props.match}/> 
+      <Main match={props.match}/>
       </>}
       />
 
       <Route exact path='/note/:noteId'
-      render={props => <Note notes={this.state.store.notes} folders={this.state.store.folders} match={props.match} history={props.history}/>}/>
+      render={props => <Note match={props.match} history={props.history}/>}/>
     </div>
+    </StoreContext.Provider>
   );
 }
 }

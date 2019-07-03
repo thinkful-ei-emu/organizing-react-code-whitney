@@ -1,12 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './styles/notelist.css'
+import StoreContext from '../context/StoreContext'
 
 
-function NoteList(props) {
+class NoteList extends React.Component {
 
-    const filteredNoteList = props.notes
-        .filter(note => `/folder/${note.folderId}` === props.match.url)
+    static contextType = StoreContext;
+
+    render(){
+
+    const filteredNoteList = this.context.notes
+        .filter(note => `/folder/${note.folderId}` === this.props.match.url)
         .map(note => {
             const date = new Date(note.modified)
         const convertedDate = date.toDateString()
@@ -21,7 +26,7 @@ function NoteList(props) {
             )
         })
 
-    const noteList = props.notes.map(note => {
+    const noteList = this.context.notes.map(note => {
         const date = new Date(note.modified)
         const convertedDate = date.toDateString()
         return (
@@ -35,7 +40,7 @@ function NoteList(props) {
         )
     })
 
-    if (props.match.url === '/') {
+    if (this.props.match.url === '/') {
         return (
             <div className="note-list">
                 {noteList}
@@ -47,6 +52,7 @@ function NoteList(props) {
         </div>
     )
 
+}
 }
 
 export default NoteList;
