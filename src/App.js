@@ -7,12 +7,12 @@ import MainSideBar from "./components/mainsidebar";
 import Header from "./components/header";
 import Note from "./components/note";
 import StoreContext from "./context/StoreContext";
+import {withRouter} from 'react-router-dom';
 
 class App extends React.Component {
   state = {
     folders: [],
     notes: [],
-    delete: this.handleDelete
   };
 
   componentDidMount() {
@@ -49,7 +49,7 @@ class App extends React.Component {
       });
   }
 
-  handleDelete(noteId) {
+  handleDelete = (noteId) => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: "DELETE",
       headers: {
@@ -57,12 +57,14 @@ class App extends React.Component {
       }
     })
     
+    console.log(this)
+    
     let filterDeleted = this.state.notes.filter(note =>
       note.id !== noteId)
       this.setState({
         notes: filterDeleted
-      })
-      .then(this.props.history.push('/'))
+      },() =>this.props.history.push('/'))
+      
   }
 
   render() {
@@ -71,7 +73,7 @@ class App extends React.Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          delete: this.state.delete
+          delete: this.handleDelete
         }}
       >
         <div className="App">
@@ -107,4 +109,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
