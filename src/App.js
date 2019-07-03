@@ -78,18 +78,17 @@ class App extends React.Component {
       >
         <div className="App">
           <Header />
-          <Route exact path="/" render={props => <MainSideBar />} />
+          <Route exact path="/" component={MainSideBar} />
           <Route
             exact
             path="/"
-            render={props => <Main match={props.match} />}
+            component={Main}
           />
           <Route
             exact
             path="/folder/:folderId"
             render={props => (
               <>
-                {" "}
                 <MainSideBar match={props.match} />
                 <Main match={props.match} />
               </>
@@ -99,9 +98,7 @@ class App extends React.Component {
           <Route
             exact
             path="/note/:noteId"
-            render={props => (
-              <Note match={props.match} history={props.history} />
-            )}
+            component={Note}
           />
         </div>
       </StoreContext.Provider>
