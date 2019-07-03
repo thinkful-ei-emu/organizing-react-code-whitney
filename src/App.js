@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
-// import store from './dummy-store';
 import { Route } from "react-router-dom";
-import Main from "./components/main";
-import MainSideBar from "./components/mainsidebar";
-import Header from "./components/header";
-import Note from "./components/note";
+import Main from "./components/Main";
+import MainSideBar from "./components/Mainsidebar";
+import Header from "./components/Header";
+import Note from "./components/Note";
 import StoreContext from "./context/StoreContext";
 import {withRouter} from 'react-router-dom';
 

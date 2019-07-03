@@ -1,5 +1,5 @@
 import React from 'react';
-import NoteList from './notelist';
+import NoteList from './Notelist';
 import './styles/main.css'
 
 function Main (props) {
