@@ -1,15 +1,29 @@
 import React from 'react';
 import NoteList from './Notelist';
-import './styles/main.css'
+import Note from './Note';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
+import { Route } from 'react-router-dom';
+import './styles/main.css';
+import StoreContext from '../context/StoreContext';
 
-function Main (props) {
+class Main extends React.Component {
+  static contextType = StoreContext;
 
-    return(
-        <div>
-            <NoteList match={props.match}/>
-            <button className="add-note">Add Note</button>
-        </div>
+  render() {
+    return (
+      <>
+        <Route exact path="/" component={NoteList} />
+
+        <Route path="/folder/:folderId" component={NoteList} />
+
+        <Route path="/note/:noteId" component={Note} />
+        <Route path="/add-folder" component={AddFolder} />
+        <Route path="/add-note" component={AddNote} />
+      </>
+
     )
+  }
 }
 
 export default Main

@@ -1,10 +1,8 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
 import Main from "./components/Main";
-import MainSideBar from "./components/Mainsidebar";
+import SideBar from "./components/SideBar";
 import Header from "./components/Header";
-import Note from "./components/Note";
 import StoreContext from "./context/StoreContext";
 import {withRouter} from 'react-router-dom';
 
@@ -12,6 +10,10 @@ class App extends React.Component {
   state = {
     folders: [],
     notes: [],
+    userInput: '',
+    userNoteName: '',
+    userNoteContent: '',
+    userFolderChoice: '',
   };
 
   componentDidMount() {
@@ -31,6 +33,7 @@ class App extends React.Component {
       .catch(error => {
         console.log(error);
       });
+
     fetch("http://localhost:9090/notes")
       .then(res => {
         if (res.ok) {
@@ -48,6 +51,31 @@ class App extends React.Component {
       });
   }
 
+  updateUserInput = (userInput) => {
+    this.setState({
+      userInput: userInput
+    })
+  }
+
+  updateNoteName = (userInput) => {
+    this.setState({
+      userNoteName: userInput
+    })
+  }
+
+  updateNoteContent = (userInput) => {
+    this.setState({
+      userNoteContent: userInput
+    })
+  }
+
+  updateFolderChoice = (userInput) => {
+    console.log(userInput)
+    this.setState({
+      userFolderChoice: userInput
+    })
+  }
+
   handleDelete = (noteId) => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: "DELETE",
@@ -55,15 +83,73 @@ class App extends React.Component {
         "content-type": "application/json"
       }
     })
-    
-    console.log(this)
-    
+
     let filterDeleted = this.state.notes.filter(note =>
       note.id !== noteId)
-      this.setState({
-        notes: filterDeleted
-      },() =>this.props.history.push('/'))
-      
+    this.setState({
+      notes: filterDeleted
+    })
+  }
+  
+  handleSave = (event) => {
+    console.log('Save is being clicked');
+    event.preventDefault();
+
+    const newFolder = {name: this.state.userInput};
+    console.log(this.state.userInput);
+    // Send to API (POST)
+    return fetch("http://localhost:9090/folders", {
+      method: 'POST', 
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify(newFolder)
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        throw new Error(res.statusText);
+      })
+      .then(resJson => {
+        console.log(resJson);
+        this.setState({
+          folders: [...this.state.folders, newFolder]
+        })
+        this.props.history.push('/');
+      })
+      .catch(error => console.log(error));
+  }
+
+  handleNoteSave = (event) => {
+    //console.log('Save is being clicked');
+    event.preventDefault();
+
+    const newNote = {
+      name: this.state.userNoteName,
+      content: this.state.userNoteContent,
+      folderId: this.state.userFolderChoice,
+      modified: new Date()
+    };
+    console.log(this.state.userInput);
+    // Send to API (POST)
+    return fetch("http://localhost:9090/notes", {
+      method: 'POST', 
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify(newNote)
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        throw new Error(res.statusText);
+      })
+      .then(resJson => {
+        console.log(resJson);
+        this.setState({
+          notes: [...this.state.notes, newNote]
+        })
+        this.props.history.push('/');
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -72,34 +158,20 @@ class App extends React.Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          delete: this.handleDelete
+          handleDelete: this.handleDelete,
+          handleSave: this.handleSave,
+          handleNoteSave: this.handleNoteSave,
+          updateUserInput: this.updateUserInput,
+          updateNoteName: this.updateNoteName,
+          updateNoteContent: this.updateNoteContent,
+          updateFolderChoice: this.updateFolderChoice,
         }}
       >
         <div className="App">
           <Header />
-          <Route exact path="/" component={MainSideBar} />
-          <Route
-            exact
-            path="/"
-            component={Main}
-          />
-          <Route
-            exact
-            path="/folder/:folderId"
-            render={props => (
-              <>
-                <MainSideBar match={props.match} />
-                <Main match={props.match} />
-              </>
-            )}
-          />
-
-          <Route
-            exact
-            path="/note/:noteId"
-            component={Note}
-          />
-        </div>
+          <SideBar />
+          <Main />
+        </div> 
       </StoreContext.Provider>
     );
   }
