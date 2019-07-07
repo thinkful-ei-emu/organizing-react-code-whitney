@@ -21,7 +21,7 @@ class NoteList extends React.Component {
                             <h2>{note.name}</h2>
                         </Link>
                         <p>Date Modified On: {convertedDate}</p>
-                        <button type="button" className="delete-button" onClick={() => this.context.handleDelete(note.id)}>Delete Note</button>
+                        <button type='button' className='delete-button' onClick={() => this.context.handleDelete(note.id)}>Delete Note</button>
                     </li>
                 )
             })

@@ -11,7 +11,7 @@ class MainSideBar extends React.Component {
   render() {
     const folderList = this.context.folders.map(folder => {
       return (
-        <li key={folder.id} className="nav-list">
+        <li key={folder.id} className='nav-list'>
           <NavLink to={`/folder/${folder.id}`} style={{ textDecoration: 'none' }}>
             {folder.name}
           </NavLink>
@@ -19,12 +19,12 @@ class MainSideBar extends React.Component {
       )
     })
     return (
-      <div className="nav-container">
+      <div className='nav-container'>
         <nav>
           {folderList}
         </nav>
         <Link to='/add-folder'>
-          <button className="add-button">Add Folder</button>
+          <button className='add-button'>Add Folder</button>
         </Link>
       </div>
     )

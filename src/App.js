@@ -1,9 +1,9 @@
-import React from "react";
-import "./App.css";
-import Main from "./components/Main";
-import SideBar from "./components/SideBar";
-import Header from "./components/Header";
-import StoreContext from "./context/StoreContext";
+import React from 'react';
+import './App.css';
+import Main from './components/Main';
+import SideBar from './components/SideBar';
+import Header from './components/Header';
+import StoreContext from './context/StoreContext';
 import {withRouter} from 'react-router-dom';
 
 class App extends React.Component {
@@ -18,7 +18,7 @@ class App extends React.Component {
 
   componentDidMount() {
     //fetch request
-    fetch("http://localhost:9090/folders")
+    fetch('http://localhost:9090/folders')
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -34,7 +34,7 @@ class App extends React.Component {
         console.log(error);
       });
 
-    fetch("http://localhost:9090/notes")
+    fetch('http://localhost:9090/notes')
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -78,10 +78,8 @@ class App extends React.Component {
 
   handleDelete = (noteId) => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json"
-      }
+      method: 'DELETE',
+      headers: new Headers({'Content-Type': 'application/json'})
     })
 
     let filterDeleted = this.state.notes.filter(note =>
@@ -98,7 +96,7 @@ class App extends React.Component {
     const newFolder = {name: this.state.userInput};
     console.log(this.state.userInput);
     // Send to API (POST)
-    return fetch("http://localhost:9090/folders", {
+    return fetch('http://localhost:9090/folders', {
       method: 'POST', 
       headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(newFolder)
@@ -131,7 +129,7 @@ class App extends React.Component {
     };
     console.log(this.state.userInput);
     // Send to API (POST)
-    return fetch("http://localhost:9090/notes", {
+    return fetch('http://localhost:9090/notes', {
       method: 'POST', 
       headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(newNote)
@@ -167,7 +165,7 @@ class App extends React.Component {
           updateFolderChoice: this.updateFolderChoice,
         }}
       >
-        <div className="App">
+        <div className='App'>
           <Header />
           <SideBar />
           <Main />

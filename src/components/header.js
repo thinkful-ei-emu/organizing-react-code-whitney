@@ -6,7 +6,7 @@ function Header () {
 
 
     return (
-        <div className="header-container">
+        <div className='header-container'>
             <Link to='/' style={{textDecoration: 'none'}}>
             <h1>Noteful</h1>
             </Link>

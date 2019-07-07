@@ -1,6 +1,6 @@
-import React from "react";
-import "./styles/note.css";
-import StoreContext from "../context/StoreContext";
+import React from 'react';
+import './styles/note.css';
+import StoreContext from '../context/StoreContext';
 
 class Note extends React.Component {
   static contextType = StoreContext;
@@ -11,7 +11,7 @@ class Note extends React.Component {
     );
 
     if (!note) {
-      return "page not found";
+      return 'page not found';
     }
 
     const date = new Date(note.modified);
@@ -19,15 +19,15 @@ class Note extends React.Component {
 
     return (
       <div key={note.id}>
-        <div className="expanded-note">
-          <h2 className="note-name">{note.name}</h2>
+        <div className='expanded-note'>
+          <h2 className='note-name'>{note.name}</h2>
           <p>Date Modified On: {convertedDate}</p>
-          <button type="button" onClick={() => this.context.handleDelete(note.id)}>
+          <button type='button' onClick={() => this.context.handleDelete(note.id)}>
             Delete Note
           </button>
         </div>
 
-        <p className="note-content">{note.content}</p>
+        <p className='note-content'>{note.content}</p>
       </div>
     );
   }

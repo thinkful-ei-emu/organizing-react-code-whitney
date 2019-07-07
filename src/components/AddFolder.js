@@ -17,9 +17,9 @@ class AddFolder extends React.Component {
   render() {
     return (
       <form onSubmit={e => this.context.handleSave(e)}> 
-        <label htmlFor="folder-input">Folder Name: </label>
-        <input type="text" name="newFolder" id="folder-input" placeholder="Not Important" className="form-input" onChange={(e) => this.context.updateUserInput(e.target.value)} />
-          <button type="submit" className="save-button">Save</button>
+        <label htmlFor='folder-input'>Folder Name: </label>
+        <input type='text' name='newFolder' id='folder-input' placeholder='Not Important' className='form-input' onChange={(e) => this.context.updateUserInput(e.target.value)} />
+          <button type='submit' className='save-button'>Save</button>
       </form>
     )
   }

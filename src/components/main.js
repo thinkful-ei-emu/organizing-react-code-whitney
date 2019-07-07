@@ -13,13 +13,13 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <Route exact path="/" component={NoteList} />
+        <Route exact path='/' component={NoteList} />
 
-        <Route path="/folder/:folderId" component={NoteList} />
+        <Route path='/folder/:folderId' component={NoteList} />
 
-        <Route path="/note/:noteId" component={Note} />
-        <Route path="/add-folder" component={AddFolder} />
-        <Route path="/add-note" component={AddNote} />
+        <Route path='/note/:noteId' component={Note} />
+        <Route path='/add-folder' component={AddFolder} />
+        <Route path='/add-note' component={AddNote} />
       </>
 
     )
