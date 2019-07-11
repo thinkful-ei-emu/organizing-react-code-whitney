@@ -21,6 +21,10 @@
     padding: 4%;
 }
 
+.nav-list-container {
+    padding-left: 0;
+}
+
 a:visited{
     color: black;
 }

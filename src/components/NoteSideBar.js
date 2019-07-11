@@ -11,10 +11,6 @@ class NoteSideBar extends React.Component {
     note => note.id === this.props.match.params.noteId
   )
 
-  // if (!currentNote) {
-  //   return 'page not found';
-  // }
-
   const currentFolderId = currentNote.folderId
   console.log()
 
