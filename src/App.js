@@ -4,6 +4,8 @@ import Main from './components/Main';
 import SideBar from './components/SideBar';
 import Header from './components/Header';
 import StoreContext from './context/StoreContext';
+import NoteErrorBoundary from './NoteErrorBoundary';
+import FolderErrorBoundary from './FolderErrorBoundary';
 import {withRouter} from 'react-router-dom';
 
 class App extends React.Component {
@@ -167,8 +169,12 @@ class App extends React.Component {
       >
         <div className='App'>
           <Header />
-          <SideBar />
-          <Main />
+          <FolderErrorBoundary>
+            <SideBar />
+          </FolderErrorBoundary>
+          <NoteErrorBoundary>
+            <Main />
+          </NoteErrorBoundary>
         </div> 
       </StoreContext.Provider>
     );

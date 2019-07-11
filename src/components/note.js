@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/note.css';
 import StoreContext from '../context/StoreContext';
+import PropTypes from 'prop-types';
 
 class Note extends React.Component {
   static contextType = StoreContext;
@@ -31,6 +32,10 @@ class Note extends React.Component {
       </div>
     );
   }
+}
+
+Note.propTypes = {
+  url: PropTypes.string
 }
 
 export default Note;

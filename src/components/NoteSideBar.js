@@ -1,5 +1,6 @@
 import React from 'react';
 import StoreContext from '../context/StoreContext';
+import PropTypes from 'prop-types';
 import './styles/notesidebar.css';
 
 class NoteSideBar extends React.Component {
@@ -10,9 +11,9 @@ class NoteSideBar extends React.Component {
     note => note.id === this.props.match.params.noteId
   )
 
-  if (!currentNote) {
-    return 'page not found';
-  }
+  // if (!currentNote) {
+  //   return 'page not found';
+  // }
 
   const currentFolderId = currentNote.folderId
   console.log()
@@ -32,5 +33,9 @@ class NoteSideBar extends React.Component {
   </div>
   )
 }}
+
+NoteSideBar.propTypes = {
+  noteId: PropTypes.string,
+}
 
 export default NoteSideBar;
